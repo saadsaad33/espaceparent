@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groupe Scolaire Alexandre - Espace Parents</title>
+    <style>
+        /* Base Styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9fb;
+        }
+
+        .header {
+            background: linear-gradient(90deg, #00c6ff, #0072ff); /* Light blue to blue gradient */
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo img:hover {
+            transform: rotate(360deg);
+        }
+
+        .user-info {
+            text-align: right;
+        }
+
+        .user-info p {
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .content {
+            padding: 40px 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            color: #ff4f81; /* Pink for headings */
+            margin-bottom: 30px;
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .dashboard-item {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dashboard-item h3 {
+            margin-top: 0;
+            color: #0072ff; /* Deep blue for titles */
+            font-size: 1.4em;
+        }
+
+        .dashboard-item p {
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        .dashboard-item a {
+            color: #ff7f50; /* Orange for links */
+            text-decoration: none;
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .dashboard-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .dashboard-item:hover a {
+            color: #ff4f81; /* Pink when hovered */
+        }
+
+        .dashboard-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 5px;
+            background-color: #0072ff;
+            transition: width 0.4s ease;
+        }
+
+        .dashboard-item:hover::before {
+            width: 100%;
+        }
+
+        /* Contact Info */
+        .contact-info {
+            background-color: #fff0f5; /* Light pink background */
+            padding: 20px;
+            margin-top: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-info h3 {
+            color: #ff4f81;
+        }
+
+        /* Button Animation */
+        .dashboard-item a::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: #ff7f50;
+            transition: width 0.3s;
+        }
+
+        .dashboard-item a:hover::after {
+            width: 100%;
+            transition: width 0.3s;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="logo">
+            <img src="placeholder-logo.png" alt="Groupe Scolaire Alexandre Logo">
+            <h1>ESPACE PARENTS</h1>
+        </div>
+        <div class="user-info">
+            <p>Mr./Mme. SAFIH</p>
+            <p><a href="#" style="color: white;">Déconnexion</a></p>
+        </div>
+    </header>
+
+    <!-- Content Section -->
+    <div class="content">
+        <h2>ÉLÈVE: SAFIH SAAD</h2>
+
+        <!-- Dashboard Grid with Animations -->
+        <div class="dashboard-grid">
+            <div class="dashboard-item">
+                <h3>Communication</h3>
+                <p>Accédez à vos messages et notifications.</p>
+                <a href="communication.html">En savoir plus</a>
+            </div>
+
+            <div class="dashboard-item">
+                <h3>Conversation enseignant(e)</h3>
+                <p>Discutez directement avec les enseignants.</p>
+                <a href="conversation.html">En savoir plus</a>
+            </div>
+
+            <div class="dashboard-item">
+                <h3>Suggestions & Réclamations</h3>
+                <p>Faites part de vos réclamations concernant votre enfant.</p>
+                <a href="suggestions.html">En savoir plus</a>
+            </div>
+
+            <div class="dashboard-item">
+                <h3>Devoirs & Cours</h3>
+                <p>Accédez aux devoirs et leçons de votre enfant.</p>
+                <a href="devoirs.html">En savoir plus</a>
+            </div>
+
+            <div class="dashboard-item">
+                <h3>Suivi absences & retards</h3>
+                <p>Suivez les absences et retards de votre enfant.</p>
+                <a href="absences.html">En savoir plus</a>
+            </div>
+
+            <div class="dashboard-item">
+                <h3>Suivi de la scolarité</h3>
+                <p>Consultez l'évolution de la scolarité.</p>
+                <a href="scolarite.html">En savoir plus</a>
+            </div>
+
+            <div class="dashboard-item">
+                <h3>Suivi des notes</h3>
+                <p>Consultez les notes de votre enfant.</p>
+                <a href="notes.html">En savoir plus</a>
+            </div>
+
+            <div class="dashboard-item">
+                <h3>Suivi des paiements</h3>
+                <p>Vérifiez l'état des paiements.</p>
+                <a href="paiements.html">En savoir plus</a>
+            </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="contact-info">
+            <h3>Pour nous contacter</h3>
+            <p><strong>Alexandre Écolier:</strong> 05 22 67 16 50 / 06 61 56 13 31</p>
+            <p><strong>Alexandre Collège:</strong> 05 22 34 16 69 / 05 22 34 16 70 / 06 97 41 39 16</p>
+            <p><strong>Alexandre Lycée:</strong> 05 22 67 25 51 / 05 22 35 34 24</p>
+        </div>
+    </div>
+
+</body>
+
+</html>

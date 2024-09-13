@@ -1,0 +1,157 @@
+<!-- teacher_dashboard.php -->
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de Bord Enseignant</title>
+    <style>
+        /* Base Styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9fb;
+        }
+
+        .header {
+            background: linear-gradient(90deg, #00c6ff, #0072ff);
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .content {
+            padding: 40px 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            color: #ff4f81;
+            margin-bottom: 30px;
+            animation: slideIn 1s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: #0072ff;
+        }
+
+        input[type="text"], input[type="date"], select, textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 1em;
+        }
+
+        button {
+            padding: 15px;
+            background: linear-gradient(90deg, #00c6ff, #0072ff);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #005bb5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <header class="header">
+        <div class="logo">
+            <img src="placeholder-logo.png" alt="Groupe Scolaire Alexandre Logo">
+        </div>
+        <div class="user-info">
+            <p>Bienvenue, Enseignant</p>
+            <a href="#" style="color: white;">Déconnexion</a>
+        </div>
+    </header>
+
+    <!-- Content Section -->
+    <div class="content">
+        <h2>Tableau de Bord - Upload des Devoirs</h2>
+
+        <form action="upload_homework.php" method="POST" enctype="multipart/form-data">
+            <label for="title">Titre du Devoir:</label>
+            <input type="text" id="title" name="title" required>
+
+            <label for="subject">Matière:</label>
+            <select id="subject" name="subject" required>
+                <option value="mathematique">Mathématique</option>
+                <option value="anglais">Anglais</option>
+                <option value="francais">Français</option>
+                <option value="arabe">Arabe</option>
+                <option value="physique-chimie">Physique Chimie</option>
+                <option value="svt">Science de Vie et Terre</option>
+            </select>
+
+            <label for="semester">Semestre:</label>
+            <select id="semester" name="semester" required>
+                <option value="1">Semestre 1</option>
+                <option value="2">Semestre 2</option>
+            </select>
+
+            <label for="due_date">Date Limite:</label>
+            <input type="date" id="due_date" name="due_date" required>
+
+            <label for="file">Télécharger le PDF (optionnel):</label>
+            <input type="file" id="file" name="file" accept=".pdf">
+
+            <label for="content">Instructions du Devoir:</label>
+            <textarea id="content" name="content" rows="5"></textarea>
+
+            <button type="submit">Télécharger le Devoir</button>
+        </form>
+    </div>
+
+</body>
+
+</html>

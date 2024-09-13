@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devoirs & Cours - Espace Parents</title>
+    <style>
+        /* Base Styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9fb;
+        }
+
+        .header {
+            background: linear-gradient(90deg, #00c6ff, #0072ff);
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 15px;
+        }
+
+        .user-info {
+            text-align: right;
+        }
+
+        .user-info p {
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .content {
+            padding: 40px 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            color: #ff4f81;
+            margin-bottom: 30px;
+        }
+
+        /* Filters */
+        .filters {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        select {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 1em;
+        }
+
+        /* Homework Grid */
+        .homework-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .homework-item {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .homework-item h3 {
+            margin-top: 0;
+            color: #0072ff;
+            font-size: 1.4em;
+        }
+
+        .homework-item p {
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        .homework-item a {
+            color: #ff7f50;
+            text-decoration: none;
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .homework-item a:hover {
+            color: #ff4f81;
+        }
+
+        .homework-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 5px;
+            background-color: #0072ff;
+            transition: width 0.4s ease;
+        }
+
+        .homework-item:hover::before {
+            width: 100%;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .filters {
+                flex-direction: column;
+            }
+
+            .homework-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="logo">
+            <img src="placeholder-logo.png" alt="Groupe Scolaire Alexandre Logo">
+            <h1>ESPACE PARENTS</h1>
+        </div>
+        <div class="user-info">
+            <p>Mr./Mme. SAFIH</p>
+            <a href="#" style="color: white;">Déconnexion</a>
+        </div>
+    </header>
+
+    <!-- Content Section -->
+    <div class="content">
+        <h2>ÉLÈVE: SAFIH SAAD - Devoirs & Cours</h2>
+
+        <!-- Filters -->
+        <div class="filters">
+            <select id="semester">
+                <option value="">Tous les semestres</option>
+                <option value="1">Semestre 1</option>
+                <option value="2">Semestre 2</option>
+            </select>
+            <select id="subject">
+                <option value="">Toutes les matières</option>
+                <option value="mathematique">Mathématique</option>
+                <option value="anglais">Anglais</option>
+                <option value="francais">Français</option>
+                <option value="arabe">Arabe</option>
+                <option value="physique-chimie">Physique Chimie</option>
+                <option value="svt">Science de Vie et Terre</option>
+                <option value="histoire-geo">Histoire Géographie</option>
+                <option value="philosophie">Philosophie</option>
+                <option value="instruction-islamique">Instruction Islamique</option>
+            </select>
+        </div>
+
+        <!-- Homework Grid -->
+        <div id="homework-list" class="homework-grid">
+            <!-- Homework items will be dynamically added here -->
+        </div>
+    </div>
+
+    <script>
+        const homeworkData = [
+            { id: 1, title: "Exercices d'algèbre", subject: "mathematique", semester: 1, dueDate: "2024-09-20", type: "pdf", file: "algebra_exercises.pdf" },
+            { id: 2, title: "Essay on Shakespeare", subject: "anglais", semester: 1, dueDate: "2024-09-22", type: "text", content: "Write a 500-word essay analyzing the themes in Shakespeare's 'Hamlet'." },
+            { id: 3, title: "Dissertation sur Molière", subject: "francais", semester: 2, dueDate: "2024-09-25", type: "pdf", file: "moliere_dissertation.pdf" },
+            { id: 4, title: "تمارين في النحو", subject: "arabe", semester: 1, dueDate: "2024-09-23", type: "text", content: "اكتب خمس جمل تستخدم فيها القواعد النحوية التي درسناها هذا الأسبوع." },
+            { id: 5, title: "Expérience sur la gravité", subject: "physique-chimie", semester: 2, dueDate: "2024-09-28", type: "pdf", file: "gravity_experiment.pdf" },
+            { id: 6, title: "Les écosystèmes", subject: "svt", semester: 1, dueDate: "2024-09-30", type: "text", content: "Décrivez un écosystème local et expliquez comment les différents organismes interagissent entre eux." },
+        ];
+
+        function renderHomeworkList() {
+            const semesterFilter = document.getElementById('semester').value;
+            const subjectFilter = document.getElementById('subject').value;
+
+            const filteredHomework = homeworkData.filter(hw =>
+                (!semesterFilter || hw.semester.toString() === semesterFilter) &&
+                (!subjectFilter || hw.subject === subjectFilter)
+            );
+
+            const homeworkList = document.getElementById('homework-list');
+            homeworkList.innerHTML = '';
+
+            filteredHomework.forEach(hw => {
+                const homeworkItem = document.createElement('div');
+                homeworkItem.className = 'homework-item';
+                homeworkItem.innerHTML = `
+                    <h3>${hw.title}</h3>
+                    <p>Matière: ${hw.subject}</p>
+                    <p>Semestre: ${hw.semester}</p>
+                    <p>Date limite: ${hw.dueDate}</p>
+                    ${hw.type === 'pdf' 
+                        ? `<a href="#">Télécharger ${hw.file}</a>`
+                        : `<div class="homework-content">${hw.content}</div>`
+                    }
+                `;
+                homeworkList.appendChild(homeworkItem);
+            });
+        }
+
+        document.getElementById('semester').addEventListener('change', renderHomeworkList);
+        document.getElementById('subject').addEventListener('change', renderHomeworkList);
+
+        renderHomeworkList();
+    </script>
+</body>
+
+</html>

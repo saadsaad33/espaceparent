@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de Bord Directeur</title>
+    <style>
+        /* Base Styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9fb;
+        }
+
+        .header {
+            background: linear-gradient(90deg, #00c6ff, #0072ff);
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .content {
+            padding: 40px 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            color: #ff4f81;
+            margin-bottom: 30px;
+            animation: slideIn 1s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        /* Grid of Grades and Classes */
+        .grades-grid, .classes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .grade-item, .class-item {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #ddd;
+        }
+
+        .grade-item:hover, .class-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .grade-item h3, .class-item h3 {
+            color: #0072ff;
+        }
+
+        /* Student List */
+        .student-list {
+            display: none;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .student-list h4 {
+            color: #0072ff;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th, table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        table th {
+            background-color: #0072ff;
+            color: white;
+        }
+
+        /* Buttons */
+        button {
+            padding: 10px 20px;
+            background: linear-gradient(90deg, #00c6ff, #0072ff);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background: #005bb5;
+        }
+
+        input[type="file"] {
+            margin-top: 20px;
+        }
+
+        .return-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            background: #ff4f81;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <header class="header">
+        <div class="logo">
+            <img src="placeholder-logo.png" alt="Groupe Scolaire Alexandre Logo" aria-label="Logo du Groupe Scolaire Alexandre">
+        </div>
+        <div class="user-info">
+            <p>Bienvenue, Directeur</p>
+            <a href="#" style="color: white;">Déconnexion</a>
+        </div>
+    </header>
+
+    <!-- Content Section -->
+    <div class="content">
+        <h2>Tableau de Bord - Saisir les Notes</h2>
+
+        <!-- Grade Grid -->
+        <div id="grade-grid" class="grades-grid">
+            <div class="grade-item" onclick="showClasses('Grade 1')" role="button" aria-label="Afficher les classes pour Grade 1">
+                <h3>Grade 1</h3>
+            </div>
+            <div class="grade-item" onclick="showClasses('Grade 2')" role="button" aria-label="Afficher les classes pour Grade 2">
+                <h3>Grade 2</h3>
+            </div>
+            <div class="grade-item" onclick="showClasses('Grade 3')" role="button" aria-label="Afficher les classes pour Grade 3">
+                <h3>Grade 3</h3>
+            </div>
+            <div class="grade-item" onclick="showClasses('Grade 4')" role="button" aria-label="Afficher les classes pour Grade 4">
+                <h3>Grade 4</h3>
+            </div>
+            <div class="grade-item" onclick="showClasses('Grade 5')" role="button" aria-label="Afficher les classes pour Grade 5">
+                <h3>Grade 5</h3>
+            </div>
+            <div class="grade-item" onclick="showClasses('Grade 6')" role="button" aria-label="Afficher les classes pour Grade 6">
+                <h3>Grade 6</h3>
+            </div>
+        </div>
+
+        <!-- Class Grid -->
+        <div id="class-grid" class="classes-grid" style="display: none;">
+            <!-- Class items will be dynamically added here -->
+        </div>
+
+        <!-- Student List for Selected Class -->
+        <div id="student-list" class="student-list">
+            <button class="return-button" onclick="returnToClassGrid()">Retour aux Classes</button>
+            <h4>Classe: <span id="class-name">Grade 1 - Classe A</span></h4>
+
+            <!-- Table of Students with Exam Number -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nom de l'Étudiant</th>
+                        <th>Numéro de l'Examen</th>
+                        <th>Note d'Examen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Placeholder for student rows -->
+                    <tr>
+                        <td>Étudiant 1</td>
+                        <td><input type="number" placeholder="Numéro d'examen" min="1" aria-label="Numéro d'examen"></td>
+                        <td><input type="number" placeholder="Entrez la note" min="0" max="20" aria-label="Entrez la note"></td>
+                    </tr>
+                    <tr>
+                        <td>Étudiant 2</td>
+                        <td><input type="number" placeholder="Numéro d'examen" min="1" aria-label="Numéro d'examen"></td>
+                        <td><input type="number" placeholder="Entrez la note" min="0" max="20" aria-label="Entrez la note"></td>
+                    </tr>
+                    <!-- More student rows here -->
+                </tbody>
+            </table>
+
+            <!-- Upload Excel Marks -->
+            <input type="file" id="upload" accept=".xls, .xlsx" aria-label="Télécharger un fichier Excel">
+            <button type="button" onclick="uploadMarks()">Télécharger Notes via Excel</button>
+
+            <!-- Save Button -->
+            <button type="button" onclick="saveMarks()">Sauvegarder</button>
+        </div>
+    </div>
+
+    <script>
+        // Function to show classes and hide grades grid
+        function showClasses(grade) {
+            document.getElementById('grade-grid').style.display = 'none';
+            document.getElementById('class-grid').style.display = 'grid';
+            document.getElementById('class-grid').innerHTML = `
+                <button class="return-button" onclick="returnToGradeGrid()">Retour aux Grades</button>
+                <div class="class-item" onclick="showStudents('Classe A')" role="button" aria-label="Afficher les étudiants pour Classe A">
+                    <h3>Classe A</h3>
+                </div>
+                <div class="class-item" onclick="showStudents('Classe B')" role="button" aria-label="Afficher les étudiants pour Classe B">
+                    <h3>Classe B</h3>
+                </div>
+                <div class="class-item" onclick="showStudents('Classe C')" role="button" aria-label="Afficher les étudiants pour Classe C">
+                    <h3>Classe C</h3>
+                </div>
+                <!-- More class items here -->
+            `;
+        }
+
+        // Function to show students and hide classes grid
+        function showStudents(className) {
+            document.getElementById('class-grid').style.display = 'none';
+            document.getElementById('student-list').style.display = 'block';
+            document.getElementById('class-name').innerText = className;
+        }
+
+        // Function to return to grade grid
+        function returnToGradeGrid() {
+            document.getElementById('class-grid').style.display = 'none';
+            document.getElementById('student-list').style.display = 'none';
+            document.getElementById('grade-grid').style.display = 'grid';
+        }
+
+        // Function to return to class grid from student list
+        function returnToClassGrid() {
+            document.getElementById('student-list').style.display = 'none';
+            document.getElementById('class-grid').style.display = 'grid';
+        }
+
+        // Placeholder function for uploading marks
+        function uploadMarks() {
+            alert('Upload de notes via Excel');
+        }
+
+        // Function to save marks
+        function saveMarks() {
+            alert('Notes sauvegardées');
+        }
+    </script>
+
+</body>
+
+</html>
+
